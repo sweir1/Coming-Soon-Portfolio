@@ -80,12 +80,41 @@
 				margin: 30px 0;
 			}
 
+			.pdf-viewer {
+				position: relative;
+				width: 100%;
+				margin: 20px 0;
+			}
+
 			.embedded-doc {
 				width: 100%;
-				min-height: 500px;
+				height: 80vh;
 				border: none;
 				border-radius: 10px;
 				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			}
+
+			.mobile-pdf-link {
+				display: none;
+				padding: 12px 24px;
+				background-color: var(--secondary-color);
+				color: white;
+				text-decoration: none;
+				border-radius: 25px;
+				text-align: center;
+				margin: 10px auto;
+				max-width: 200px;
+			}
+
+			@media (max-width: 768px) {
+				.embedded-doc {
+					height: 70vh;
+					-webkit-overflow-scrolling: touch;
+				}
+
+				.mobile-pdf-link {
+					display: block;
+				}
 			}
 
 			@media (max-width: 768px) {
@@ -131,14 +160,21 @@
 	</head>
 	<body>
 		<div class="container">
+			<!-- Replace the current iframe section with this -->
 			<div class="content-section">
 				<p class="message">
 					Well, since I clearly wasn't going to study... Here's everything organized (turns out I can be
 					useful sometimes 😂)
 				</p>
 
-				<!-- Embedded document viewer -->
-				<iframe class="embedded-doc" src="files/final_assignment.pdf"></iframe>
+				<!-- PDF viewer with fallback -->
+				<div class="pdf-viewer">
+					<iframe
+						class="embedded-doc"
+						src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/sweir1/Coming-Soon-Portfolio/main/annabelle/files/final_assignment.pdf">
+					</iframe>
+					<a href="files/final_assignment.pdf" class="mobile-pdf-link"> Open PDF in new tab </a>
+				</div>
 			</div>
 
 			<div class="download-section">
