@@ -3,69 +3,180 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Annabelle's Work</title>
+		<title>Hey Annabelle! 👋</title>
 		<style>
+			:root {
+				--primary-color: #ff69b4;
+				--secondary-color: #4a90e2;
+				--background-color: #f8f9fa;
+			}
+
 			body {
-				font-family: Arial, sans-serif;
+				font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 				line-height: 1.6;
 				margin: 0;
-				padding: 20px;
-				background-color: #f4f4f4;
+				padding: 0;
+				background-color: var(--background-color);
+				color: #333;
 			}
+
 			.container {
 				max-width: 800px;
 				margin: 0 auto;
-				background-color: white;
 				padding: 20px;
-				border-radius: 8px;
+			}
+
+			.header {
+				text-align: center;
+				padding: 40px 20px;
+				background: linear-gradient(135deg, #fff, #f0f0f0);
+				border-radius: 15px;
+				margin-bottom: 30px;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			}
+
+			h1 {
+				margin: 0;
+				color: var(--primary-color);
+				font-size: 2.5rem;
+				margin-bottom: 10px;
+			}
+
+			.subtitle {
+				font-size: 1.2rem;
+				color: #666;
+				margin-bottom: 20px;
+			}
+
+			.content-section {
+				background: white;
+				padding: 30px;
+				border-radius: 15px;
+				margin-bottom: 20px;
 				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 			}
-			h1 {
-				color: #333;
-				text-align: center;
+
+			.download-btn {
+				display: inline-block;
+				padding: 12px 24px;
+				background-color: var(--secondary-color);
+				color: white;
+				text-decoration: none;
+				border-radius: 25px;
+				margin: 10px;
+				transition:
+					transform 0.2s,
+					box-shadow 0.2s;
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 			}
-			.content {
+
+			.download-btn:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+			}
+
+			.download-section {
+				text-align: center;
+				margin: 30px 0;
+			}
+
+			.embedded-doc {
+				width: 100%;
+				min-height: 500px;
+				border: none;
+				border-radius: 10px;
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			}
+
+			@media (max-width: 768px) {
+				.container {
+					padding: 15px;
+				}
+
+				h1 {
+					font-size: 2rem;
+				}
+
+				.content-section {
+					padding: 20px;
+				}
+
+				.download-btn {
+					display: block;
+					margin: 10px auto;
+					max-width: 200px;
+				}
+			}
+
+			.footer {
+				text-align: center;
+				padding: 20px;
+				color: #666;
+				font-size: 0.9rem;
+			}
+
+			.countdown {
+				text-align: center;
+				font-size: 0.9rem;
+				color: #666;
 				margin-top: 20px;
 			}
-			.expired-message {
-				text-align: center;
+
+			.message {
+				font-style: italic;
 				color: #666;
-				display: none;
+				text-align: center;
+				margin: 20px 0;
 			}
 		</style>
 	</head>
 	<body>
 		<div class="container">
-			<div id="content" class="content">
-				<h1>Annabelle's Work</h1>
-				<!-- Add Annabelle's work content here -->
-				<p>Here's your work, Annabelle! 😉</p>
-				<!-- Add more content as needed -->
+			<div class="content-section">
+				<p class="message">
+					Look who actually did their work! Here's everything you need, carefully packaged with a touch of fun
+					(and maybe a tiny bit of sass) 😉
+				</p>
+
+				<!-- Embedded document viewer -->
+				<iframe class="embedded-doc" src="files/final_assignment.pdf"></iframe>
 			</div>
-			<div id="expired" class="expired-message">
-				<p>This content is no longer available.</p>
+
+			<div class="download-section">
+				<a href="files/final_assignment.docx" class="download-btn">📄 Download Word Document</a>
+				<a href="files/SPSS.zip" class="download-btn">📦 Download SPSS Files</a>
+			</div>
+
+			<div class="footer">
+				<p>Created with dedication (and maybe a little procrastination) 😌</p>
+				<div class="countdown" id="countdown"></div>
 			</div>
 		</div>
 
 		<script>
-			function checkExpiration() {
+			function updateCountdown() {
 				const expirationDate = new Date("2024-12-18T23:59:00");
 				const currentDate = new Date();
 
 				if (currentDate > expirationDate) {
-					document.getElementById("content").style.display = "none";
-					document.getElementById("expired").style.display = "block";
-					// Redirect after showing the expired message briefly
+					document.body.innerHTML =
+						'<div class="container"><div class="message">This content has expired.</div></div>';
 					setTimeout(() => {
 						window.location.href = "/";
 					}, 2000);
+					return;
 				}
+
+				const timeLeft = expirationDate - currentDate;
+				const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+				const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+
+				document.getElementById("countdown").innerHTML =
+					`This page will self-destruct in: ${hours}h ${minutes}m ⏰`;
 			}
 
-			// Check when page loads
-			checkExpiration();
-			// Check every minute
-			setInterval(checkExpiration, 60000);
+			updateCountdown();
+			setInterval(updateCountdown, 60000);
 		</script>
 	</body>
 </html>
