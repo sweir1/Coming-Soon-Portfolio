@@ -1,0 +1,32 @@
+name: Delete Annabelle Files
+
+on:
+  schedule:
+    # This will run at 23:59 UTC on December 18, 2024
+    - cron: '59 23 18 12 *'
+
+jobs:
+  delete-files:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: true
+
+      - name: Delete files
+        run: |
+          rm annabelle/files/SPSS.zip
+          rm annabelle/files/final_assignment.docx
+          rm annabelle/files/final_assignment.pdf
+          
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Automated file deletion - December 18, 2024" || exit 0
+          git push
