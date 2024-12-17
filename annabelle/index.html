@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Annabelle's Work</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				line-height: 1.6;
+				margin: 0;
+				padding: 20px;
+				background-color: #f4f4f4;
+			}
+			.container {
+				max-width: 800px;
+				margin: 0 auto;
+				background-color: white;
+				padding: 20px;
+				border-radius: 8px;
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			}
+			h1 {
+				color: #333;
+				text-align: center;
+			}
+			.content {
+				margin-top: 20px;
+			}
+			.expired-message {
+				text-align: center;
+				color: #666;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div id="content" class="content">
+				<h1>Annabelle's Work</h1>
+				<!-- Add Annabelle's work content here -->
+				<p>Here's your work, Annabelle! 😉</p>
+				<!-- Add more content as needed -->
+			</div>
+			<div id="expired" class="expired-message">
+				<p>This content is no longer available.</p>
+			</div>
+		</div>
+
+		<script>
+			function checkExpiration() {
+				const expirationDate = new Date("2024-12-18T23:59:00");
+				const currentDate = new Date();
+
+				if (currentDate > expirationDate) {
+					document.getElementById("content").style.display = "none";
+					document.getElementById("expired").style.display = "block";
+					// Redirect after showing the expired message briefly
+					setTimeout(() => {
+						window.location.href = "/";
+					}, 2000);
+				}
+			}
+
+			// Check when page loads
+			checkExpiration();
+			// Check every minute
+			setInterval(checkExpiration, 60000);
+		</script>
+	</body>
+</html>
