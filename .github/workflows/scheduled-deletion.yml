@@ -22,6 +22,7 @@ jobs:
           rm annabelle/files/SPSS.zip
           rm annabelle/files/final_assignment.docx
           rm annabelle/files/final_assignment.pdf
+          rm annabelle/files/IMG_9726.jpeg
           
       - name: Commit changes
         run: |
